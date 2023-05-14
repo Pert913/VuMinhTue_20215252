@@ -1,12 +1,12 @@
 package hust.soict.globalict.garbage;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.IOException;
+import java.io.*;
 
 public class GarbageCreator {
     
     public static void main(String[] args) throws IOException {
-        String filename = "test.exe";
+        String filename = "OtherProjects/src/hust/soict/globalict/garbage/test.exe";
         byte[] inputBytes = {0};
         long startTime, endTime;
 
