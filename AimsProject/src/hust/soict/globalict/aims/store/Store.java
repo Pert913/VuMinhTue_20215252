@@ -126,5 +126,5 @@ public class Store {
 			System.out.println("Invalid input.");
 		}
 		scanner.close();
-	}
+	}	
 }
