@@ -1,3 +1,5 @@
+package hust.soict.globalict.lab01;
+
 import javax.swing.JOptionPane;
 
 public class Equation {

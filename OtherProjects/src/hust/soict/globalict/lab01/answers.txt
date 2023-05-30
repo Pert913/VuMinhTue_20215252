@@ -1,0 +1,3 @@
+- The program regards that as "No", and proceeds to display "You've chosen: No".
+- We can use showOptionDialog() method to display a dialog box with the desired option messages.
+A variable (e.g. result) is set to the index of the button clicked to determine which option was selected.

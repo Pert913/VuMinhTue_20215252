@@ -1,0 +1,22 @@
+Q: Which classes are aggregates of other classes? Checking all constructors of whole classes if they initialize for their parts? 
+A: A class is considered an aggregate of other classes if it has a strong ownership or containment relationship with them:
+- The class has instance variables or fields that represent other classes.
+- The class creates instances of other classes and holds references to them.
+- The class is responsible for managing the lifecycle or behavior of the other classes.
+- The class delegates certain operations or functionalities to the other classes.
+- The class exposes methods that allow accessing or manipulating the other classes it contains.
+
+Q: When overriding the equals() method of the Object class, you will have to cast the Object parameter obj to the type of Object that you are dealing with. For example, in the Media class, you must cast the Object obj to a Media, and then check the equality of the two objects' attributes as the above requirements (i.e. title for Media; title and length for Track). If the passing object is not an instance of Media, what happens? 
+A: Said object cannot get access to Media's getter like getTitle() and getLength(). In this scenario, we can make equals() method return false because objects of different classes cannot be considered equal.
+
+Q: Alternatively, to compare items in the cart, instead of using Comparator, we can use the Comparable interface and override the compareTo() method. You can refer to the Java docs to see the information of this interface.  
+Suppose we are taking this Comparable interface approach. 
+- What class should implement the Comparable interface? 
+- In those classes, how should you implement the compareTo() method be to reflect the ordering that we want? 
+- Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach? 
+- Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this? 
+A:
+- In would be the Media class.
+- The method should return a negative integer if the current object is less than the other object, zero if they are equal, and a positive integer if the current object is greater than the other object.
+- No, it's not possible because the Comparable interface allows us to define a single natural ordering for a class.
+- I would override the compareTo() method in the DigitalVideoDisc class to implement the specific ordering logic for DVDs. 
