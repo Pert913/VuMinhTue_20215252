@@ -101,282 +101,219 @@ public class Aims {
         while (!exit) {
             // Main menu
             showMenu();
-            if (scanner.hasNextInt()) {
-                n = scanner.nextInt();
-                scanner.nextLine(); // Consume newline character
+            n = scanner.nextInt(); scanner.nextLine();
+
+            switch (n) {
+                // View store
+                case 1:
+                    boolean exitStore = false;
+                    while (!exitStore) {
+                        // Display all items in the store
+                        store.print();
     
-                switch (n) {
-                    // View store
-                    case 1:
-                        boolean exitStore = false;
-                        while (!exitStore) {
-                            // Display all items in the store
-                            store.print();
-    
-                            storeMenu();
-                            if (scanner.hasNextInt()) {
-                                n = scanner.nextInt();
-                                scanner.nextLine(); // Consume newline character
-                                Media choice;
-                                switch (n) {
-                                    // See a media's details
-                                    case 1:
-                                        System.out.println("Enter the title of the media.");
-                                        m = scanner.nextLine();
-                                        choice = store.searchMedia(m);
-                                        if (choice == null) {
-                                            System.out.println("No match found");
-                                        } else {
-                                            boolean exitDetails = false;
-                                            while (!exitDetails) {
-                                                mediaDetailsMenu();
-                                                if (scanner.hasNextInt()) {
-                                                    n = scanner.nextInt();
-                                                    scanner.nextLine(); // Consume newline character
-                                                    switch (n) {
-                                                        // Add to cart
-                                                        case 1:
-                                                            cart.addMedia(choice);
-                                                            exitDetails = true;
-                                                            break;
-    
-                                                        // Play
-                                                        case 2:
-                                                            choice.playMedia();
-                                                            break;
-    
-                                                        // Exit
-                                                        case 0:
-                                                            exitDetails = true;
-                                                            break;
-    
-                                                        default:
-                                                            System.out.println("Invalid input");
-                                                    }
-                                                } else {
-                                                    scanner.nextLine(); // Discard invalid input
-                                                    System.out.println("Invalid input");
-                                                }
-                                            }
-                                        }
-                                        break;
-    
-                                    // Add a media to cart
-                                    case 2:
-                                        System.out.println("Enter the title.");
-                                        m = scanner.nextLine();
-                                        cart.addMedia(store.searchMedia(m));
-                                        break;
-    
-                                    // Play a media
-                                    case 3:
-                                        System.out.println("Enter the title.");
-                                        m = scanner.nextLine();
-                                        store.searchMedia(m).playMedia();
-                                        break;
-    
-                                    // See current cart
-                                    case 4:
-                                        cart.print();
-                                        break;
-    
-                                    // Exit
-                                    case 0:
-                                        exitStore = true;
-                                        break;
-    
-                                    default:
-                                        System.out.println("Invalid input.");
-                                }
-                            } else {
-                                scanner.nextLine(); // Discard invalid input
-                                System.out.println("Invalid input.");
-                            }
-                        }
-                        break;
-    
-                    // Update store
-                    case 2:
-                    storeMenu();
-                    if (scanner.hasNextInt()) {
-                        n = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline character
+                        storeMenu();
+                        n = scanner.nextInt(); scanner.nextLine();
+                        Media choice;
                         switch (n) {
                             // See a media's details
                             case 1:
                                 System.out.println("Enter the title of the media.");
                                 m = scanner.nextLine();
-                                // Rest of the code
+                                choice = store.searchMedia(m);
+                                if (choice == null) {
+                                    System.out.println("No match found");
+                                } else {
+                                    boolean exitDetails = false;
+                                    while (!exitDetails) {
+                                        mediaDetailsMenu();
+                                        n = scanner.nextInt(); scanner.nextLine();
+                                        switch (n) {
+                                            // Add to cart
+                                            case 1:
+                                                cart.addMedia(choice);
+                                                exitDetails = true;
+                                                break;
+                                            // Play
+                                            case 2:
+                                                choice.playMedia();
+                                                break;
+                                            // Exit
+                                            case 0:
+                                                exitDetails = true;
+                                                break;
+                                            default:
+                                                System.out.println("Invalid input");
+                                        }
+                                    }
+                                }
                                 break;
-
                             // Add a media to cart
                             case 2:
                                 System.out.println("Enter the title.");
                                 m = scanner.nextLine();
-                                // Rest of the code
+                                cart.addMedia(store.searchMedia(m));
                                 break;
-
                             // Play a media
                             case 3:
                                 System.out.println("Enter the title.");
                                 m = scanner.nextLine();
-                                // Rest of the code
+                                store.searchMedia(m).playMedia();
                                 break;
-
                             // See current cart
                             case 4:
                                 cart.print();
                                 break;
-
                             // Exit
                             case 0:
                                 exitStore = true;
                                 break;
-
                             default:
                                 System.out.println("Invalid input.");
                         }
-                    } else {
-                        scanner.nextLine(); // Discard invalid input
-                        System.out.println("Invalid input.");
                     }
                     break;
 
-                    // See current cart
-                    case 3:
-                    boolean exitCart = false;
-                    while (!exitCart) {
-                        cart.print();
-                        cartMenu();
-                        if (scanner.hasNextInt()) {
+                // Update store
+                case 2:
+                    boolean exitUpdate = false;
+                    updateStore();
+                    while (!exitUpdate) {
+                        // if (scanner.hasNextInt()) {
                             n = scanner.nextInt();
-                            scanner.nextLine(); // Consume newline character
+                            // scanner.nextLine();
                             switch (n) {
-                                // Filter in cart
+                                // Add to store
                                 case 1:
-                                    filterCart();
-                                    if (scanner.hasNextInt()) {
-                                        n = scanner.nextInt();
-                                        scanner.nextLine(); // Consume newline character
-                                        switch (n) {
-                                            // Filter by id
-                                            case 1:
-                                                System.out.println("Enter the id: ");
-                                                n = scanner.nextInt();
-                                                scanner.nextLine(); // Consume newline character
-                                                System.out.println("\n***********************CART***********************");
-                                                System.out.println("Ordered Items:");
-                                                System.out.println("1. " + cart.searchMedia(n).toString());
-                                                System.out.println("Total cost: " + cart.totalCost() + " $");
-                                                System.out.println("**************************************************");
-                                                break;
-                
-                                            // Filter by title
-                                            case 2:
-                                                System.out.println("Enter the title: ");
-                                                scanner.nextLine(); // Consume newline character
-                                                m = scanner.nextLine();
-                                                System.out.println("\n***********************CART***********************");
-                                                System.out.println("Ordered Items:");
-                                                System.out.println("1. " + cart.searchMedia(m).toString());
-                                                System.out.println("Total cost: " + cart.totalCost() + " $");
-                                                System.out.println("**************************************************");
-                                                break;
-                
-                                            // Back
-                                            case 0:
-                                                break;
-                                            default:
-                                                System.out.println("Invalid input.");
-                                        }
-                                    } else {
-                                        scanner.nextLine(); // Discard invalid input
-                                        System.out.println("Invalid input.");
-                                    }
+                                    store.addToStore();
                                     break;
-                
-                                // Sort in cart
+
+                                // Remove from store
                                 case 2:
-                                    sortCart();
-                                    n = scanner.nextInt();
-                                    switch(n) {
-                                        // Sort by title
-                                        case 1:
-                                            cart.sortByTitle();
-                                            break;
-                                        // Sort by cost
-                                        case 2:
-                                            cart.sortByCost();
-                                            break;
-                                        // Back
-                                        case 0:
-                                            break;
-                                        default:
-                                            System.out.println("Invalid input.");
-                                    }
+                                    store.removeFromStore();
                                     break;
-                
-                                // Remove from cart
-                                case 3:
-                                    cart.print();
-                                    System.out.println("Enter the ID: ");
-                                    if (scanner.hasNextInt()) {
-                                        n = scanner.nextInt();
-                                        scanner.nextLine(); // Consume newline character
-                                        cart.removeMedia(cart.searchMedia(n));
-                                    } else {
-                                        scanner.nextLine(); // Discard invalid input
-                                        System.out.println("Invalid input.");
-                                    }
-                                    break;
-                
-                                // Play a media
-                                case 4:
-                                    cart.print();
-                                    System.out.println("Enter the ID: ");
-                                    if (scanner.hasNextInt()) {
-                                        n = scanner.nextInt();
-                                        scanner.nextLine(); // Consume newline character
-                                        cart.searchMedia(n).playMedia();
-                                    } else {
-                                        scanner.nextLine(); // Discard invalid input
-                                        System.out.println("Invalid input.");
-                                    }
-                                    break;
-                
-                                // Place order
-                                case 5:
-                                    System.out.println("Order created.");
-                                    cart.placeOrder();
-                                    exitCart = true;
-                                    break;
-                
+
                                 // Exit
                                 case 0:
-                                    exitCart = true;
+                                    exitUpdate = true;
                                     break;
-                
+
                                 default:
                                     System.out.println("Invalid input.");
                             }
-                        } else {
-                            scanner.nextLine(); // Discard invalid input
+                            updateStore();
+                    //     } else {
+                    //         if (scanner.hasNextLine()) {
+                    //             scanner.nextLine(); // Discard invalid input
+                    //         }
+                    //     }
+                    }
+                    break;
+
+                // See current cart
+                case 3:
+                    boolean exitCart = false;
+                    while (!exitCart) {
+                    cart.print();
+                    cartMenu();
+                    n = scanner.nextInt(); scanner.nextLine();
+                    switch (n) {
+                        // Filter in cart
+                        case 1:
+                            filterCart();
+                            n = scanner.nextInt(); scanner.nextLine();
+                            switch (n) {
+                                // Filter by id
+                                case 1:
+                                    System.out.println("Enter the id: ");
+                                    n = scanner.nextInt(); scanner.nextLine();
+                                    System.out.println("\n***********************CART***********************");
+                                    System.out.println("Ordered Items:");
+                                    System.out.println("1. " + cart.searchMedia(n).toString());
+                                    System.out.println("Total cost: " + cart.totalCost() + " $");
+                                    System.out.println("**************************************************");
+                                    break;
+    
+                                // Filter by title
+                                case 2:
+                                    System.out.println("Enter the title: ");
+                                    m = scanner.nextLine();
+                                    System.out.println("\n***********************CART***********************");
+                                    System.out.println("Ordered Items:");
+                                    System.out.println("1. " + cart.searchMedia(m).toString());
+                                    System.out.println("Total cost: " + cart.totalCost() + " $");
+                                    System.out.println("**************************************************");
+                                    break;
+    
+                                // Back
+                                case 0:
+                                    break;
+                                default:
+                                    System.out.println("Invalid input.");
+                                }
+                            break;
+        
+                        // Sort in cart
+                        case 2:
+                            sortCart();
+                            n = scanner.nextInt(); scanner.nextLine();
+                            switch(n) {
+                                // Sort by title
+                                case 1:
+                                    cart.sortByTitle();
+                                    break;
+                                // Sort by cost
+                                case 2:
+                                    cart.sortByCost();
+                                    break;
+                                // Back
+                                case 0:
+                                    break;
+                                default:
+                                    System.out.println("Invalid input.");
+                            }
+                            break;
+        
+                        // Remove from cart
+                        case 3:
+                            cart.print();
+                            System.out.println("Enter the ID: ");
+                            n = scanner.nextInt(); scanner.nextLine();
+                            cart.removeMedia(cart.searchMedia(n));
+                            break;
+        
+                        // Play a media
+                        case 4:
+                            cart.print();
+                            System.out.println("Enter the ID: ");
+                            n = scanner.nextInt(); scanner.nextLine();
+                            cart.searchMedia(n).playMedia();
+                            break;
+        
+                        // Place order
+                        case 5:
+                            System.out.println("Order created.");
+                            cart.placeOrder();
+                            exitCart = true;
+                            break;
+        
+                        // Exit
+                        case 0:
+                            exitCart = true;
+                            break;
+        
+                        default:
                             System.out.println("Invalid input.");
                         }
-                    }
-                        break;
-    
-                    // Exit
-                    case 0:
-                        exit = true;
-                        break;
-    
-                    default:
-                        System.out.println("Invalid input.");
                 }
-            } else {
-                scanner.nextLine(); // Discard invalid input
-                System.out.println("Invalid input.");
+                    break;
+
+                // Exit
+                case 0:
+                    exit = true;
+                    break;
+
+                default:
+                    System.out.println("Invalid input.");
             }
         }
         scanner.close();
