@@ -83,7 +83,7 @@ public class AddBook extends AddItem implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand() == "add") {
+        if (e.getActionCommand().equals("add")) {
 
             String title, category, authorString;
             float cost;

@@ -1,26 +1,29 @@
 package hust.soict.globalict.aims.screen.store;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
 import hust.soict.globalict.aims.media.*;
 import hust.soict.globalict.aims.screen.App;
 
-public class StoreScreen extends JPanel {
+public class StoreScreen extends JPanel implements ActionListener {
     protected App parentFrame;
 
     public StoreScreen(App app) {
         this.parentFrame = app;
+        this.setLayout(new BorderLayout()); 
         add(createNorth(), BorderLayout.NORTH);
         add(createCenter(), BorderLayout.CENTER);
         setVisible(true);
     }
 
+
     JPanel createNorth() {
         JPanel north = new JPanel();
         north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
-        // north.add(createMenuBar());
         north.add(createHeader());
         return north;
     }
@@ -50,6 +53,8 @@ public class StoreScreen extends JPanel {
         JButton cart = new JButton("View cart");
         cart.setPreferredSize(new Dimension(100, 50));
         cart.setMaximumSize(new Dimension(100, 50));
+        cart.setActionCommand("viewCart");
+        cart.addActionListener(this);
 
         header.add(Box.createRigidArea(new Dimension(10, 10)));
         header.add(title);
@@ -58,5 +63,11 @@ public class StoreScreen extends JPanel {
         header.add(Box.createRigidArea(new Dimension(10, 10)));
         
         return header;
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        parentFrame.actionPerformed(e);
     }
 }

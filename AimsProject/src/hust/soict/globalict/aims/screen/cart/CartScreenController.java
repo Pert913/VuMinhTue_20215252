@@ -3,6 +3,8 @@ package hust.soict.globalict.aims.screen.cart;
 import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Playable;
+import hust.soict.globalict.aims.screen.App;
+import hust.soict.globalict.aims.store.Store;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
@@ -12,15 +14,31 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class CartScreenController {
 
     private Cart cart;
+    private Store store;
+    private Stage stage;
 
+    @FXML
+    private MenuItem storeScreen;
+
+    @FXML
+    private MenuItem addBook;
+
+    @FXML
+    private MenuItem addCD;
+
+    @FXML
+    private MenuItem addDVD;
+    
     @FXML
     private Label lbTotalCost;
     
@@ -48,9 +66,10 @@ public class CartScreenController {
     @FXML
     private TableView<Media> tblMedia;
 
-    public CartScreenController(Cart cart) {
+    public CartScreenController(Store store, Cart cart) {
         super();
         this.cart = cart;
+        this.store = store;
     }
 
     @FXML
@@ -127,5 +146,26 @@ public class CartScreenController {
         else {
             btnPlay.setVisible(false);
         }
+    }
+
+    @FXML
+    void addBookMenu(ActionEvent event) {
+        stage.close();
+        new App(store, cart);
+    }
+
+    @FXML
+    void addCDMenu(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addDVDMenu(ActionEvent event) {
+
+    }
+
+    @FXML
+    void storeScreenMenu(ActionEvent event) {
+
     }
 }
