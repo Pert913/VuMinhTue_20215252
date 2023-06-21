@@ -178,18 +178,16 @@ public class Aims {
                     boolean exitUpdate = false;
                     updateStore();
                     while (!exitUpdate) {
-                        // if (scanner.hasNextInt()) {
                             n = scanner.nextInt();
-                            // scanner.nextLine();
                             switch (n) {
                                 // Add to store
                                 case 1:
-                                    store.addToStore();
+                                    // store.addToStore();
                                     break;
 
                                 // Remove from store
                                 case 2:
-                                    store.removeFromStore();
+                                    // store.removeFromStore();
                                     break;
 
                                 // Exit
@@ -201,11 +199,6 @@ public class Aims {
                                     System.out.println("Invalid input.");
                             }
                             updateStore();
-                    //     } else {
-                    //         if (scanner.hasNextLine()) {
-                    //             scanner.nextLine(); // Discard invalid input
-                    //         }
-                    //     }
                     }
                     break;
 

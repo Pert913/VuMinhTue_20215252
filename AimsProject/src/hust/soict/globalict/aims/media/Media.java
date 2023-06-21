@@ -44,12 +44,12 @@ public class Media {
 		return false;
 	}
 
-    public void playMedia() {
+    public String playMedia() {
         if (this instanceof Playable) {
             Playable playable = (Playable) this;
-            playable.play();
+            return playable.play();
         } else {
-            System.out.println("This form of media is not playable.");
+            return "This form of media is not playable.";
         }
     }
     

@@ -1,10 +1,13 @@
 package hust.soict.globalict.aims.cart;
 import hust.soict.globalict.aims.media.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 public class Cart {
 	public static final int MAX_NUMBERS_ORDERED = 20;
-	private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+	private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
 	
 	public void addMedia(Media media) {
 		if (itemsOrdered.size() < MAX_NUMBERS_ORDERED && !itemsOrdered.contains(media)) {
@@ -89,4 +92,8 @@ public class Cart {
 	public void sortByCost() {
 		Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);
 	}
+
+    public ObservableList<Media> getItemsOrdered() {
+        return itemsOrdered;
+    }
 }
